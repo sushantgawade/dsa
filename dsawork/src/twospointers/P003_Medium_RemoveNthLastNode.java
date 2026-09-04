@@ -53,7 +53,7 @@ public class P003_Medium_RemoveNthLastNode {
         ListNode fast = dummy;
         ListNode slow = dummy;
 
-        for(int i =0; i< n; i++) {
+        for(int i =0; i < n + 1; i++) {
             fast = fast.next;
         }
 
