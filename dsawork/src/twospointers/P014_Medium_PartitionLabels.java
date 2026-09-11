@@ -77,7 +77,30 @@ public class P014_Medium_PartitionLabels {
 
     private List<Integer> partitionLabels(String s) {
 
+        int[] lastOccurences = new int[26];
+
+        int partitionStart =  0;
+        int partitionEnd =  0;
+
+        for(int i =0; i< s.length(); i++) {
+
+            lastOccurences[s.charAt(i) - 'a'] = i;
+        }
+
+
         List<Integer> partitionSizes = new ArrayList<>();
+
+        for(int i =0; i< s.length(); i++) {
+
+            partitionEnd = Math.max(partitionEnd, lastOccurences[s.charAt(i) - 'a']);
+
+            if(i == partitionEnd) {
+
+                partitionSizes.add(i - partitionStart + 1 );
+                partitionStart = i + 1;
+            }
+
+        }
 
         return partitionSizes;
     }
