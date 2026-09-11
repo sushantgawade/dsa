@@ -20,6 +20,21 @@ public class LinkedList {
 
     private void createLinkedList(List<Integer> values) {
 
+        if(null == values || values.isEmpty()) {
+            return;
+        }
+
+        head = new ListNode(values.get(0));
+
+        ListNode current = head;
+
+        for(int i = 1; i < values.size(); i++) {
+
+            current.next = new ListNode(values.get(i));
+
+            current = current.next;
+        }
+
     }
 }
 
