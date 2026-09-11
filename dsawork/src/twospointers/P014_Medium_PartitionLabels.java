@@ -56,6 +56,25 @@ public class P014_Medium_PartitionLabels {
 
      */
 
+    // Create an integer array to store the last occurrence index of each character from 'a' to 'z'.
+
+    // Iterate through the input string to populate the last occurrence array.
+    // For each character, record its current index as the last position it appears in the string.
+
+    // Initialize markers for the current partition's start and end boundaries.
+    // Create a list to store the resulting partition sizes.
+
+    // Iterate through the string character by character to determine partition segments.
+    // Update the partition's end boundary to the maximum of its current value and the last occurrence index of the current character.
+
+    // If the current index reaches the current partition's end boundary:
+    // A valid partition has been found because all characters within it do not appear later in the string.
+    // Calculate the size of the partition (current index - partition start + 1).
+    // Add the partition size to the list.
+    // Move the start boundary to the index immediately following the current position for the next partition.
+
+    // Return the list containing the sizes of all valid partitions.
+
     private List<Integer> partitionLabels(String s) {
 
         List<Integer> partitionSizes = new ArrayList<>();
