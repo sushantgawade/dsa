@@ -85,6 +85,34 @@ public class P016_Medium_StringCompression {
 
         int w = 0;
 
+        int n = chars.length;
+
+        int i = 0;
+
+        while(i < n) {
+
+            int j = i;
+
+            while (j < n && chars[j] == chars[i]) {
+                j++;
+            }
+
+            int count = j - i;
+
+            chars[w++] = chars[i];
+
+
+            if(count > 0 ) {
+
+                for(char c : String.valueOf(count).toCharArray()) {
+                    chars[w++] = c;
+                }
+            }
+
+            i = j;
+
+        }
+
         return w;
     }
 
