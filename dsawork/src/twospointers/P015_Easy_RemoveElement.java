@@ -46,9 +46,18 @@ public class P015_Easy_RemoveElement {
     Let’s look at the following illustration to get a better understanding of the solution:
      */
 
-    private int removeElement(int[] ints, int i) {
+    private int removeElement(int[] nums, int val) {
 
         int k =0;
+
+        for ( int j = 0; j < nums.length; j++) {
+
+            if(nums[j] != val) {
+                nums[k] = nums[j];
+                k++;
+            }
+
+        }
 
         return k;
     }
