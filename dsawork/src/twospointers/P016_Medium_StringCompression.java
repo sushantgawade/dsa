@@ -102,7 +102,7 @@ public class P016_Medium_StringCompression {
             chars[w++] = chars[i];
 
 
-            if(count > 0 ) {
+            if(count > 1 ) {
 
                 for(char c : String.valueOf(count).toCharArray()) {
                     chars[w++] = c;
