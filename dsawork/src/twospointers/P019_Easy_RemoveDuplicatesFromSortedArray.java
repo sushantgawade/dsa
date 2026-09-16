@@ -76,7 +76,6 @@ public class P019_Easy_RemoveDuplicatesFromSortedArray {
 
         }
         return i + 1;
-
     }
 
 
