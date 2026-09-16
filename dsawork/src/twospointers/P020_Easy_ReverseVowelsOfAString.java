@@ -1,5 +1,10 @@
 package twospointers;
 
+import org.w3c.dom.ls.LSResourceResolver;
+
+import java.util.HashSet;
+import java.util.Set;
+
 public class P020_Easy_ReverseVowelsOfAString {
 
 
@@ -66,9 +71,38 @@ public class P020_Easy_ReverseVowelsOfAString {
      */
 
 
-    private String reverseVowels(String testCase) {
+    private String reverseVowels(String str) {
 
-        return null;
+        Set<Character> vowels = new HashSet<>();
+
+        for(char c: "aeiouAEIOU".toCharArray()) {
+            vowels.add(c);
+        }
+
+        char[] chars = str.toCharArray();
+
+        int left = 0;
+        int right = str.length() - 1;
+
+        while(left < right) {
+
+            while(left < right && !vowels.contains(chars[left])) {
+                left++;
+            }
+            while(left < right && !vowels.contains(chars[right])) {
+                right--;
+            }
+
+            char temp = chars[left];
+            chars[left] =  chars[right];
+            chars[right] = temp;
+
+            left++;
+            right--;
+        }
+
+
+        return new String(chars);
     }
 
     public static void main(String[] args) {
