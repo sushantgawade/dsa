@@ -82,8 +82,32 @@ Let’s look at the following illustration to get a better understanding of the 
 
      */
 
-    private int compareVersion(String v1, String v2) {
+    private int compareVersion(String version1, String version2) {
 
+        String[] rev1 = version1.split("\\.");
+        String[] rev2 = version2.split("\\.");
+
+        int p1 = 0;
+        int p2 = 0;
+
+        int maxLength = Math.max(rev1.length, rev2.length);
+
+        while( p1 < maxLength || p2 < maxLength) {
+
+            int val1 = p1 < rev1.length ? Integer.parseInt(rev1[p1]): 0;
+            int val2 = p2 < rev2.length ? Integer.parseInt(rev2[p2]): 0;
+
+            if(val1 < val2) {
+                return -1;
+            }
+            else if(val1 > val2) {
+                return 1;
+            }
+            p1++;
+            p2++;
+        }
+
+        return 0;
     }
 
     public static void main(String[] args) {
