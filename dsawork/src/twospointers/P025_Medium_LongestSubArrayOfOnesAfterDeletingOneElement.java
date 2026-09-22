@@ -1,5 +1,7 @@
 package twospointers;
 
+import java.util.Arrays;
+
 public class P025_Medium_LongestSubArrayOfOnesAfterDeletingOneElement {
 
 
@@ -42,9 +44,56 @@ public class P025_Medium_LongestSubArrayOfOnesAfterDeletingOneElement {
 
          */
 
+    private int longestSubarray(int[] nums) {
+
+        int left = 0;
+        int maxLength = 0;
+        int zeroCount = 0;
+
+        for(int right = 0; right < nums.length; right++) {
+
+            if(nums[right] == 0) {
+                zeroCount++;
+            }
+
+            while(zeroCount > 1) {
+
+                if(nums[left] == 0) {
+                    zeroCount--;
+                }
+                left++;
+            }
+
+
+            maxLength =  Math.max(maxLength, right -left);
+
+        }
+
+        return maxLength;
+    }
+
     public static void main(String[] args) {
 
+        P025_Medium_LongestSubArrayOfOnesAfterDeletingOneElement sol = new P025_Medium_LongestSubArrayOfOnesAfterDeletingOneElement();
+
+        int[][][] testCases = {
+                {{1, 0, 1, 1, 0, 1, 1, 1}},
+                {{0, 0, 1, 1, 1, 1, 0, 0}},
+                {{1, 1, 0, 0, 1, 1, 1, 0, 1}},
+                {{0}},
+                {{1, 1, 1, 1, 1, 1, 0}},
+        };
+
+        for (int i = 0; i < testCases.length; i++) {
+            int[] nums = testCases[i][0];
+            int result = sol.longestSubarray(nums);
+            System.out.println((i + 1) + ".\tInput array: " + Arrays.toString(nums));
+            System.out.println("\tResult: " + result);
+            System.out.println("-".repeat(100));
+        }
 
 
     }
+
+
 }
