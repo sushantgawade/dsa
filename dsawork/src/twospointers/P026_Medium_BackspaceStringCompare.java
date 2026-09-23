@@ -39,6 +39,41 @@ public class P026_Medium_BackspaceStringCompare {
 
     If the loop completes without returning False, all visible characters matched, so return True.
 
+ public boolean backspaceCompare(String s, String t) {
+        // Initialize two pointers starting at the last index of both strings s and t.
+        // Initialize two counters to keep track of the number of backspaces ('#') to skip for each string.
+
+        // Iterate while there is at least one character left to process in either string.
+            // Process string s to find the index of the next valid character:
+                // While the pointer for s is greater than or equal to zero:
+                    // If the character at the pointer is '#':
+                        // Increment the backspace skip counter for s and move the pointer back.
+                    // Otherwise, if the skip counter for s is greater than zero:
+                        // Decrement the skip counter and move the pointer back.
+                    // Otherwise, the current character is valid and needs comparison:
+                        // Break the inner loop.
+
+            // Process string t to find the index of the next valid character:
+                // While the pointer for t is greater than or equal to zero:
+                    // If the character at the pointer is '#':
+                        // Increment the backspace skip counter for t and move the pointer back.
+                    // Otherwise, if the skip counter for t is greater than zero:
+                        // Decrement the skip counter and move the pointer back.
+                    // Otherwise, the current character is valid and needs comparison:
+                        // Break the inner loop.
+
+            // Perform the comparison between the characters found:
+                // If both pointers are still within the bounds of their strings:
+                    // If the characters at the current pointers are different, return false.
+                // Otherwise, if only one pointer is within bounds while the other is exhausted:
+                    // Return false because one resulting string is longer than the other.
+
+            // Decrement both pointers to move to the next set of characters in the next iteration.
+
+        // If the entire length of both strings is processed without returning false, return true.
+        return true;
+    }
+
      */
 
     private boolean backspaceCompare(String s, String t) {
@@ -46,6 +81,7 @@ public class P026_Medium_BackspaceStringCompare {
     }
 
     public static void main(String[] args) {
+
         P026_Medium_BackspaceStringCompare sol = new P026_Medium_BackspaceStringCompare();
 
         String[][] testCases = {
