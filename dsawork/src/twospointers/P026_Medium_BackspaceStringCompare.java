@@ -78,6 +78,60 @@ public class P026_Medium_BackspaceStringCompare {
 
     private boolean backspaceCompare(String s, String t) {
 
+        int iS = s.length() - 1;
+        int iT = t.length() - 1;
+
+        int spaceCountS = 0;
+        int spaceCountT = 0;
+
+        while(iS >=0 || iT >= 0) {
+
+            while(iS >= 0) {
+
+                if(s.charAt(iS) == '#') {
+                    spaceCountS++;
+                    iS--;
+                }
+                else if( spaceCountS > 0) {
+                    spaceCountS--;
+                    iS--;
+                }
+                else {
+                    break;
+                }
+            }
+
+            while (iT >= 0) {
+
+                if(s.charAt(iT) == '#') {
+                    spaceCountT++;
+                    iT--;
+                }
+                else if(spaceCountT > 0) {
+                    spaceCountT--;
+                    iT--;
+                }
+                else {
+                    break;
+                }
+            }
+
+            if(iS >=0 && iT >= 0 ) {
+
+                if(s.charAt(iS) != t.charAt(iT)) {
+                    return false;
+                }
+            }
+            else if(iS >=0 || iT >= 0 ) {
+
+                return false;
+            }
+
+            iS--;
+            iT--;
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
