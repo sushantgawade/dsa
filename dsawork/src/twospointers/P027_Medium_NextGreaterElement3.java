@@ -74,12 +74,49 @@ public class P027_Medium_NextGreaterElement3 {
         // If it fits within the limit, return the result as an integer; otherwise, return -1.
     }
 
-
      */
 
     private int nextGreaterElement(int n) {
 
-        return 0;
+        char[] digits = String.valueOf(n).toCharArray();
+
+        int length = digits.length;
+
+        int pivot = length - 2;
+
+        while( pivot >= 0 && digits[pivot] >= digits[pivot + 1]) {
+
+            pivot--;
+        }
+
+        if (pivot < 0) return -1;
+
+        int swapIndex = length - 1;
+
+        while(  swapIndex >= 0 && digits[swapIndex] <= digits[pivot]) {
+            swapIndex--;
+        }
+
+        char temp = digits[swapIndex];
+        digits[swapIndex] = digits[pivot];
+        digits[pivot] = temp;
+
+
+        int left = pivot + 1;
+        int right = length - 1;
+
+        while(left < right) {
+
+            char tmp = digits[left];
+            digits[left] = digits[right];
+            digits[right] = tmp;
+
+            left++;
+            right--;
+        }
+
+        long num = Long.parseLong(new String(digits));
+        return num <= Integer.MAX_VALUE ? (int)num : -1;
     }
 
     public static void main(String[] args) {
