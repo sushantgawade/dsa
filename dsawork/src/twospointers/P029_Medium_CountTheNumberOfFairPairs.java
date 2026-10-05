@@ -82,7 +82,37 @@ public class P029_Medium_CountTheNumberOfFairPairs {
 
     private long countFairPairs(int[] nums, int lower, int upper) {
 
-        return 0;
+        Arrays.sort(nums);
+
+        class Counter {
+
+            long countPairsAtMost(long targetSum) {
+
+                int left = 0;
+                int right = nums.length - 1;
+
+                int totalPairs = 0;
+
+                while(left < right) {
+
+                    if((long)nums[left] + nums[right] <= targetSum ){
+
+                        totalPairs += right - left;
+                        left++;
+                    }
+                    else {
+                        right--;
+                    }
+                }
+
+                return totalPairs;
+            }
+        }
+
+        Counter counter = new Counter();
+
+        return counter.countPairsAtMost(upper) - counter.countPairsAtMost(lower - 1);
+
     }
 
     public static void main(String[] args) {
