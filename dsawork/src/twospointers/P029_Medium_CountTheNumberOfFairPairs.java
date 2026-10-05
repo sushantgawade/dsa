@@ -81,6 +81,8 @@ public class P029_Medium_CountTheNumberOfFairPairs {
      */
 
     private long countFairPairs(int[] nums, int lower, int upper) {
+
+        return 0;
     }
 
     public static void main(String[] args) {
