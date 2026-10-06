@@ -2,6 +2,7 @@ package twospointers;
 
 import common.ListNode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,17 +67,66 @@ public class P030_Medium_RemoveDuplicatesFromSortedList2 {
 
     public ListNode deleteDuplicates(ListNode head) {
 
-        return null;
+        ListNode dummyNode = new ListNode(0, head);
+
+        ListNode previousNode = dummyNode;
+        ListNode current = head;
+
+        while(current != null ) {
+
+            boolean hasDuplicate = false;
+
+            while(current.next != null && current.val == current.next.val ) {
+
+                hasDuplicate = true;
+
+                current = current.next;
+            }
+
+            if(hasDuplicate) {
+
+                previousNode.next = current.next;
+            }
+            else {
+                previousNode = previousNode.next;
+            }
+
+            current = current.next;
+
+        }
+
+
+        return dummyNode.next;
     }
 
     public static ListNode buildLinkedList(List<Integer> values) {
 
-        return null;
+        ListNode dummyNode = new ListNode(0);
+
+        ListNode currentNode = dummyNode;
+
+        for( Integer val : values) {
+
+            currentNode.next = new ListNode(val);
+            currentNode =  currentNode.next;
+        }
+
+        return dummyNode.next;
     }
 
     public static List<Integer> linkedListToList(ListNode head) {
 
-        return null;
+        List<Integer> integerList = new ArrayList<>();
+
+        ListNode current = head;
+
+        while(current != null) {
+
+            integerList.add(current.val);
+            current = current.next;
+        }
+
+        return integerList;
     }
 
     public static void main(String[] args) {
