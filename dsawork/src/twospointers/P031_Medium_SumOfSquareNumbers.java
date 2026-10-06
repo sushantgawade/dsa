@@ -54,10 +54,30 @@ If the loop ends without finding a match (left exceeds right), return False, sin
             // If the loop finishes without finding a valid pair, return false.
         }
 
-
  */
 
     public boolean judgeSquareSum(int c) {
+
+        long left = 0;
+        long right = (long)Math.floor(Math.sqrt((double)c));
+
+        while( left <= right ) {
+
+            long squareSum  = left * left + right * right;
+
+            if(squareSum < (long)c) {
+                left++;
+            } else if (squareSum > (long)c) {
+                right--;
+            }
+            else {
+
+                System.out.println(" ( " +left + " , " + right +" ) ");
+
+                return true;
+            }
+        }
+
         return false;
     }
 
