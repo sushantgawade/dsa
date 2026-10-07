@@ -79,6 +79,21 @@ public class P010_Medium_AppendCharactersToStringToMakeSubsequence {
 
     private int appendCharacters(String source, String target) {
 
+        int sourceIndex = 0;
+        int targetIndex = 0;
+        int sourceLength = source.length();
+        int targetLength = target.length();
+
+        while(sourceIndex < sourceLength && targetIndex < targetLength) {
+
+            if(source.charAt(sourceIndex) == target.charAt(targetIndex)) {
+                targetIndex++;
+            }
+
+            sourceIndex++;
+        }
+
+        return targetLength - targetIndex;
     }
 
     public static void main(String[] args) {
