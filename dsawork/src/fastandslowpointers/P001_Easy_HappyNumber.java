@@ -89,7 +89,34 @@ As an example, suppose we have the number
 
      */
 
-    private static boolean isHappyNumber(int i) {
+    public static int sumOfSquaredDigits(int number) {
+
+        int sumOfSquareOfDigits =  0;
+
+        while(number > 0) {
+
+            int digit = number % 10;
+
+            number = number / 10;
+
+            sumOfSquareOfDigits += Math.pow(digit, 2);
+        }
+
+        return  sumOfSquareOfDigits;
+    }
+
+    private static boolean isHappyNumber(int number) {
+
+        int slowPointer = number;
+        int fastPointer = sumOfSquaredDigits(number);
+
+        while(fastPointer != 1 && slowPointer != fastPointer) {
+
+            slowPointer = sumOfSquaredDigits(slowPointer);
+            fastPointer = sumOfSquaredDigits(sumOfSquaredDigits(fastPointer));
+        }
+
+        return fastPointer == 1;
     }
 
     public static void main(String[] args) {
