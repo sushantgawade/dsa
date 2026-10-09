@@ -12,11 +12,39 @@ public class PrintList {
 
         while (current != null) {
 
-            System.out.print(current.val + " -> ");
+            System.out.print(current.val );
 
             current = current.next;
+
+            if(current != null ) {
+                System.out.print( " -> ");
+            }
+            else {
+                System.out.print(" -> None \n ");
+            }
+        }
+    }
+
+    public static void displayLoop(ListNode head) {
+
+        if(null == head) {
+            return;
         }
 
-        System.out.println("None");
+        ListNode current  = head;
+
+        while (current != null) {
+
+            System.out.print(current.val );
+
+            current = current.next;
+
+            if(current != null ) {
+                System.out.print( " -> ");
+            }
+
+        }
+
     }
+
 }

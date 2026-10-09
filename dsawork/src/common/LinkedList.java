@@ -36,5 +36,43 @@ public class LinkedList {
         }
 
     }
+
+    public static int getLength(ListNode head) {
+
+        int count = 0;
+
+        ListNode current =  head;
+
+        while (current != null) {
+
+            count++;
+
+            current = current.next;
+        }
+
+        return count;
+    }
+
+    public static ListNode getNode(ListNode head, int pos){
+
+        ListNode ptr = head;
+
+        if(pos != -1) {
+
+            int p = 0;
+
+            while (p < pos) {
+
+                ptr = ptr.next;
+
+                p++;
+            }
+
+            return ptr;
+        }
+
+        return ptr;
+    }
+
 }
 
