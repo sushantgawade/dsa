@@ -18,7 +18,7 @@ public class LinkedList {
     }
 
 
-    private void createLinkedList(List<Integer> values) {
+    public void createLinkedList(List<Integer> values) {
 
         if(null == values || values.isEmpty()) {
             return;
