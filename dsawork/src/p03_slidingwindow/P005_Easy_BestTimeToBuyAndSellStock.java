@@ -107,7 +107,30 @@ public class P005_Easy_BestTimeToBuyAndSellStock {
 
      */
 
-    private static int maxProfit(int[] ints) {
+    private static int maxProfit(int[] prices) {
+
+        int buy = 0;
+        int sell = 1;
+        int maxProfit = 0;
+
+        while (sell < prices.length) {
+
+            int currentProfit = prices[sell] - prices[buy];
+
+            if(prices[buy] < prices[sell] ) {
+
+                maxProfit = Math.max(maxProfit, currentProfit);
+            }
+            else
+            {
+                buy = sell;
+            }
+
+            sell++;
+        }
+
+        return maxProfit;
+
     }
 
     public static void main(String[] args) {
