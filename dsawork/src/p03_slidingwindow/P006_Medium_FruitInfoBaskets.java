@@ -1,5 +1,8 @@
 package p03_slidingwindow;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class P006_Medium_FruitInfoBaskets {
 
 
@@ -93,6 +96,34 @@ public class P006_Medium_FruitInfoBaskets {
      */
 
     private static int totalFruit(int[] fruit) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        int left = 0;
+
+        int collected = 0;
+
+        for(int right = 0;  right < fruit.length; right++) {
+
+            map.put(fruit[right], map.getOrDefault(fruit[right], 0) + 1);
+
+            while(map.size() > 2) {
+
+                map.put(fruit[left], map.get(fruit[left]) - 1  );
+
+                if(map.get(fruit[left]) == 0) {
+                    map.remove(fruit[left]);
+                }
+
+                left++;
+            }
+
+            collected = Math.max(collected, right - left + 1);
+
+        }
+
+        return collected;
+
     }
 
     public static void main(String[] args) {
