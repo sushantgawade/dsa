@@ -66,7 +66,24 @@ public class P008_Easy_MaximumAverageSubArray1 {
 
     private static double findMaxAverage(int[] nums, int k) {
 
+        int currentSum = 0;
 
+        int maxSum = 0;
+
+        for(int i =0; i < k; i++ ) {
+
+            currentSum += nums[i];
+        }
+
+        for(int i = k; i < nums.length; i++ ) {
+
+            currentSum += nums[i] - nums[i-k];
+
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+
+        return (double) maxSum / k;
 
     }
 
