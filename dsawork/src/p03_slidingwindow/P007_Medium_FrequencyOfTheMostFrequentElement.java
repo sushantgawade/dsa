@@ -128,14 +128,38 @@ public class P007_Medium_FrequencyOfTheMostFrequentElement {
      */
 
 
-    private static int maxFrequency(int[] testCase, int kValue) {
+    private static int maxFrequency(int[] nums, int k) {
 
+        Arrays.sort(nums);
+
+        int left = 0;
+        int maxFreq = 0;
+        int windowSum = 0;
+
+        for( int right = 0; right < nums.length; right++) {
+
+            int target = nums[right];
+
+            windowSum += target;
+
+            while( (right - left + 1) * target > windowSum + k ) {
+
+                windowSum -= nums[left];
+
+                left++;
+            }
+
+            maxFreq = Math.max(maxFreq, right - left + 1);
+        }
+
+        return maxFreq;
     }
 
     public static void main(String[] args) {
 
         int[][] testCases = {
                 {1, 2, 4},
+                {1, 2, 2, 2, 1, 3, 3},
                 {1, 4, 8, 13},
                 {3, 6, 9},
                 {2, 3, 5},
@@ -144,7 +168,7 @@ public class P007_Medium_FrequencyOfTheMostFrequentElement {
                 {10, 12, 5, 1, 15, 20, 13, 4, 7, 3, 9, 14, 2, 8, 6, 16, 11, 18, 19, 17},
                 {5, 5, 5, 5, 6, 7, 8, 9, 10, 10, 10, 10, 10, 11, 12, 13, 14, 15, 16, 17}
         };
-        int[] kValues = {5, 5, 2, 3, 2, 7, 50, 30};
+        int[] kValues = {5, 2, 5, 2, 3, 2, 7, 50, 30};
 
         for (int i = 0; i < testCases.length; i++) {
             System.out.println((i + 1) + ".\tnums = " + Arrays.toString(testCases[i]));
