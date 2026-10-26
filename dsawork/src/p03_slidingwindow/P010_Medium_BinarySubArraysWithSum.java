@@ -98,11 +98,87 @@ public class P010_Medium_BinarySubArraysWithSum {
     }
 
 
+    Let's slow right down and look at this with a simple picture,
+    because this is easily one of the trickiest edge cases in sliding window problems.The core reason
+    this code is weird is because zeros have no value, but they create extra winning answers.
+    The Core Problem with ZerosImagine your array is nums = [0, 0, 1] and your goal is 1.
+    If you ask, "Where does a subarray sum up to 1?", there are actually three different answers
+    depending on where you start:Starting at index 0: [0, 0, 1] (Sum = 1) ✅Starting at index 1: [0, 1] (Sum = 1)
+     ✅Starting at index 2: [1] (Sum = 1) ✅If you use a standard sliding window, it will find the first one ([0, 0, 1]).
+     But when you try to shrink the window from the left, a standard window would just jump straight past both zeros
+     and completely miss [0, 1] and [1]!How the Code Solves It Step-by-StepWhen end lands on the 1, your window sum is 1
+     (which matches your goal).Instead of just recording +1 and moving on, the code says: "Wait, let's look at the left edge.
+     Are there leading zeros sitting there?"nums[start] == 0: It checks if the left edge is a 0. Since it is, it knows:
+     "Hey, this 0 means we can chop it off and still have a valid sum!"prefixZeros++: It records that it found a leading
+     zero and keeps track of how many consecutive zeros it has peeled off so far.totalCount += 1 + prefixZeros;:
+     This is the magic formula.The 1 counts the main window ([0, 0, 1]).The prefixZeros counts the bonus valid subarrays
+     you get by stripping away those leading zeros one by one ([0, 1] and [1]).SummaryprefixZeros is just a memory counter.
+      Because zeros don't change the sum, every leading zero at your left boundary multiplies your valid starting points.
+      Tracking them lets you scoop up all those extra combinations in one go without breaking the $O(N)$ speed!
+
+
      */
+
+    private int numSubarraysWithSum(int[] nums, int goal) {
+
+        int prefixesZero = 0;
+        int currentSum = 0;
+        int totalCount = 0;
+
+        int start = 0;
+
+        for(int end = 0; end < nums.length; end++) {
+
+            currentSum += nums[end];
+
+            while(start <= end && currentSum > goal) {
+
+                currentSum -= nums[start];
+
+                start++;
+
+                prefixesZero = 0;
+            }
+
+            while(start < end && nums[start] == 0 &&  currentSum == goal) {
+
+                currentSum -= nums[start];
+
+                start++;
+
+                prefixesZero++;
+            }
+
+            if(start < end && currentSum == goal) {
+
+                totalCount += 1 + prefixesZero;
+            }
+        }
+
+        return totalCount;
+    }
 
     public static void main(String[] args) {
 
+        P010_Medium_BinarySubArraysWithSum sol = new P010_Medium_BinarySubArraysWithSum();
 
+        int[][] arrays = {
+                {1,0,1,0,1},
+                {0,0,0,0,0},
+                {1,1,1},
+                {0,1,0,1,0,1},
+                {1}
+        };
+
+        int[] goals = {2, 0, 2, 2, 1};
+
+        for (int i = 0; i < arrays.length; i++) {
+            int res = sol.numSubarraysWithSum(arrays[i], goals[i]);
+            System.out.println((i+1) + ".\tnums: " + java.util.Arrays.toString(arrays[i]));
+            System.out.println("\tgoal: " + goals[i]);
+            System.out.println("\tNumber of subarrays with sum = " + goals[i] + " are " + res + ".");
+            System.out.println("-".repeat(100));
+        }
 
     }
 
