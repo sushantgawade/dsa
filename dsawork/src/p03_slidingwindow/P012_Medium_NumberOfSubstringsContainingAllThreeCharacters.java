@@ -1,5 +1,8 @@
 package p03_slidingwindow;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class P012_Medium_NumberOfSubstringsContainingAllThreeCharacters {
 
 
@@ -121,11 +124,35 @@ public class P012_Medium_NumberOfSubstringsContainingAllThreeCharacters {
      */
 
 
-    private int numberOfSubstrings(String input) {
+    private int numberOfSubstrings(String str) {
 
+        int n = str.length();
 
+        int result = 0;
 
+        Map<Character, Integer> countMap = new HashMap<>();
 
+        countMap.put('a', 0);
+        countMap.put('b', 0);
+        countMap.put('c', 0);
+
+        int left = 0;
+
+        for(int right = 0; right < n; right++) {
+
+            countMap.put(str.charAt(right), countMap.get(str.charAt(right)) + 1);
+
+            while(countMap.get('a') > 0 && countMap.get('b') > 0 && countMap.get('c') > 0) {
+
+                result += n - right;
+
+                countMap.put(str.charAt(left), countMap.get(str.charAt(left)) - 1 );
+
+                left++;
+
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {
