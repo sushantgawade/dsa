@@ -139,6 +139,21 @@ m
 
 
     private int strStr(String haystack, String needle) {
+
+        int haystackLen = haystack.length();
+        int needleLen = needle.length();
+
+        if(needleLen > haystackLen) {
+            return -1;
+        }
+
+        for(int startIdx = 0; startIdx <= haystackLen - needleLen; startIdx++) {
+
+            if(haystack.substring(startIdx, startIdx + needleLen).equals(needle)) {
+                return startIdx;
+            }
+        }
+        return -1;
     }
 
     public static void main(String[] args) {
