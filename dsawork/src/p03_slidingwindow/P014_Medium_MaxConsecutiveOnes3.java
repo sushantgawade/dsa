@@ -130,6 +130,33 @@ O(1)
      */
 
 
+    private int longestOnes(int[] nums, int k) {
+
+        int left = 0;
+        int zeroCount = 0;
+        int maxLen = 0;
+
+
+        for(int right = 0; right < nums.length; right++) {
+
+            if(nums[right] == 0) {
+                zeroCount++;
+            }
+
+            while(zeroCount > k) {
+
+                if(nums[left] == 0) {
+                    zeroCount--;
+                }
+
+                left++;
+            }
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+
     public static void main(String[] args) {
 
         P014_Medium_MaxConsecutiveOnes3 sol = new P014_Medium_MaxConsecutiveOnes3();
@@ -153,11 +180,6 @@ O(1)
             System.out.println("\tResult: " + result);
             System.out.println("-".repeat(100));
         }
-
-    }
-
-    private int longestOnes(int[] nums, int k) {
-
 
     }
 
