@@ -1,7 +1,9 @@
 package p04_intervals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class P002_Medium_InsertInterval {
 
@@ -175,8 +177,39 @@ O(1)
 
      */
 
-    private static int[][] insertInterval(int[][] existingInterval, int[] newInterval) {
+    private static int[][] insertInterval(int[][] intervals, int[] newInterval) {
 
+        List<int[]> output = new ArrayList<>();
+
+        int i = 0;
+
+        while(i < intervals.length && intervals[i][0] < newInterval[0]) {
+
+            output.add(intervals[i]);
+            i++;
+        }
+
+        if(output.isEmpty() || output.get(output.size() - 1)[1] < newInterval[0]) {
+            output.add(newInterval);
+        }
+        else {
+            output.get(output.size() - 1)[1] = Math.max(output.get(output.size() - 1)[1], newInterval[1]);
+        }
+
+        while(i < intervals.length) {
+
+            int last[] = output.get(output.size() - 1);
+
+            if(last[1] < intervals[i][0]) {
+                output.add(intervals[i]);
+            }
+            else {
+                last[1] = Math.max(last[1], intervals[i][1]);
+            }
+            i++;
+        }
+
+        return output.toArray(new int[output.size()][]);
 
     }
 
