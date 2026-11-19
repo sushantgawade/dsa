@@ -1,6 +1,8 @@
 package p04_intervals;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class P004_Medium_TaskScheduler {
 
@@ -112,6 +114,32 @@ O(1)
      */
 
     private static int leastInterval(char[] tasks, int n) {
+
+        int[] frequencies = new int[26];
+
+        for(int task : tasks) {
+
+            frequencies[task - 'A']++;
+        }
+
+        frequencies = Arrays.stream(frequencies)
+                .boxed()
+                .sorted(Comparator.reverseOrder())
+                .mapToInt(Integer :: intValue)
+                .toArray();
+
+        int maxGaps =  frequencies[0] - 1;
+
+        int idleSlots = maxGaps * n;
+
+        for(int i = 1; i< 26; i++) {
+
+            idleSlots -= Math.min(maxGaps, frequencies[i]);
+        }
+
+        idleSlots = Math.max(0, idleSlots);
+
+        return tasks.length + idleSlots;
     }
 
     public static void main(String[] args) {
