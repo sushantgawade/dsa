@@ -1,6 +1,7 @@
 package p04_intervals;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class P005_Medium_Meeting_Rooms_II {
 
@@ -198,6 +199,27 @@ O(n)
      */
 
     private static int findSets(int[][] intervals) {
+
+        if(intervals.length == 0) {
+            return 0;
+        }
+
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0],b[0]));
+
+        PriorityQueue<Integer> endTimestamp = new PriorityQueue<>();
+
+        endTimestamp.offer(intervals[0][1]);
+
+        for(int i = 1; i < intervals.length; i++) {
+
+            if(intervals[i][0] >= endTimestamp.peek()) {
+                endTimestamp.poll();
+            }
+
+            endTimestamp.offer(intervals[i][1]);
+        }
+
+        return endTimestamp.size();
     }
 
     public static void main(String[] args) {
