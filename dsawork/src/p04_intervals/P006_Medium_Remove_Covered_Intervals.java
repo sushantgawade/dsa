@@ -1,5 +1,7 @@
 package p04_intervals;
 
+import java.util.Arrays;
+
 public class P006_Medium_Remove_Covered_Intervals {
 
     /*
@@ -224,6 +226,36 @@ O(log n)
 
 
     private int removeCoveredIntervals(int[][] intervals) {
+
+        Arrays.sort(intervals, (a, b) -> {
+
+            if(a[0] == b[0]) {
+                return b[1] - a[1];
+            }
+            else {
+
+                return a[0] -b[0];
+            }
+        } );
+
+        int end = 0;
+        int prevEnd = 0;
+        int count = 0;
+
+
+        for(int[] intterval : intervals) {
+
+            end = intterval[1];
+
+            if(end > prevEnd) {
+
+                count++;
+                prevEnd = end;
+
+            }
+        }
+
+        return count;
     }
 
     public static void main(String[] args) {
