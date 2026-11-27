@@ -1,6 +1,9 @@
 package p04_intervals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class P010_Medium_AddBoldTagInString {
 
@@ -176,6 +179,72 @@ O(k+∣s∣)
 
 
     private String addBoldTag(String s, String[] words) {
+
+        List<int[]> intervals = new ArrayList<>();
+
+        for(String word : words) {
+
+            int start = s.indexOf(word);
+
+            if(start != -1) {
+
+                intervals.add(new int[] {start, start + word.length()});
+
+                start = s.indexOf(word, start + 1);
+            }
+        }
+
+        if(intervals.isEmpty()) {
+            return s;
+        }
+
+        intervals.sort(Comparator.comparingInt((int[] interval) -> interval[0])
+                .thenComparing(interval ->  interval[1])
+        );
+
+
+        List<int[]> mergedIntervals = new ArrayList<>();
+        int currentStart = intervals.get(0)[0];
+        int currentEnd = intervals.get(0)[1];
+
+        for(int i = 1; i < intervals.size(); i++) {
+
+            int start = intervals.get(i)[0];
+            int end = intervals.get(i)[0];
+
+            if(start <= currentEnd ) {
+
+                currentEnd = Math.max(currentEnd, end);
+            }
+            else {
+                mergedIntervals.add(new int[]{currentStart, currentEnd});
+                currentStart = start;
+                currentEnd = end;
+            }
+        }
+
+        mergedIntervals.add(new int[]{currentStart, currentEnd});
+
+        StringBuilder result = new StringBuilder();
+        int previousEnd = 0;
+
+        for(int[] mergedInterval : mergedIntervals) {
+
+            int start = mergedInterval[0];
+            int end = mergedInterval[1];
+
+            result.append(s, previousEnd, start);
+            result.append("<b>");
+            result.append(s, start, end);
+            result.append("</b>");
+            previousEnd = end;
+        }
+
+        result.append(s.substring( previousEnd ));
+
+        return result.toString();
+
+
     }
 
     public static void main(String[] args) {
