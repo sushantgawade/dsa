@@ -186,7 +186,7 @@ O(k+∣s∣)
 
             int start = s.indexOf(word);
 
-            if(start != -1) {
+            while(start != -1) {
 
                 intervals.add(new int[] {start, start + word.length()});
 
