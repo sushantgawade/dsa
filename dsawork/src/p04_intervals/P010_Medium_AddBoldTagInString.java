@@ -210,7 +210,7 @@ O(k+∣s∣)
         for(int i = 1; i < intervals.size(); i++) {
 
             int start = intervals.get(i)[0];
-            int end = intervals.get(i)[0];
+            int end = intervals.get(i)[1];
 
             if(start <= currentEnd ) {
 
